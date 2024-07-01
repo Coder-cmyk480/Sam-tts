@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text-to-Speech App</title>
+    <style>
+        /* Add your custom CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Text-to-Speech App</h1>
+    <textarea id="inputText" rows="4" cols="50" placeholder="Enter text..."></textarea>
+    <br>
+    <label for="pitch">Pitch:</label>
+    <input type="range" id="pitch" min="0" max="2" step="0.1" value="1">
+    <br>
+    <label for="speed">Speed:</label>
+    <input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
+    <br>
+    <button onclick="speak()">Speak</button>
+
+    <script>
+        const inputText = document.getElementById('inputText');
+        const pitchSlider = document.getElementById('pitch');
+        const speedSlider = document.getElementById('speed');
+
+        function speak() {
+            const text = inputText.value;
+            const pitch = pitchSlider.value;
+            const speed = speedSlider.value;
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.pitch = parseFloat(pitch);
+            utterance.rate = parseFloat(speed);
+
+            // Optional: Customize voice (e.g., for different accents or languages)
+            // utterance.voice = speechSynthesis.getVoices().find(voice => voice.lang === 'en-US');
+
+            speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
