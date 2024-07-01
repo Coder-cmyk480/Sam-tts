@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Automatic Mouth with Sheet Editor</title>
+    <style>
+        /* Add your custom CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Automatic Mouth with Sheet Editor</h1>
+    <textarea id="lyrics" rows="4" cols="50" placeholder="Enter lyrics..."></textarea>
+    <br>
+    <label for="pitch">Pitch:</label>
+    <input type="range" id="pitch" min="0" max="2" step="0.1" value="1">
+    <br>
+    <button onclick="sing()">Sing</button>
+
+    <!-- Sheet editor (you can replace this with a more advanced library) -->
+    <div id="sheetEditor">
+        <!-- Display music notation here -->
+    </div>
+
+    <script>
+        const lyricsInput = document.getElementById('lyrics');
+        const pitchSlider = document.getElementById('pitch');
+        const sheetEditor = document.getElementById('sheetEditor');
+
+        function sing() {
+            const lyrics = lyricsInput.value;
+            const pitch = parseFloat(pitchSlider.value);
+
+            // Create a SpeechSynthesisUtterance object for singing
+            const utterance = new SpeechSynthesisUtterance(lyrics);
+            utterance.pitch = pitch;
+
+            // Optional: Customize voice (e.g., for different accents or languages)
+            // utterance.voice = speechSynthesis.getVoices().find(voice => voice.lang === 'en-US');
+
+            // Play the synthesized singing
+            speechSynthesis.speak(utterance);
+
+            // Update the sheet editor (you can use a music notation library here)
+            updateSheetEditor(lyrics, pitch);
+        }
+
+        function updateSheetEditor(lyrics, pitch) {
+            // Implement your sheet editor logic here
+            // You can use existing libraries like Soundslice
